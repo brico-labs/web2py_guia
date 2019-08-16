@@ -1,0 +1,14 @@
+= Introducción =
+
+[http://www.web2py.com/ web2py] es un framework para desarrollo de aplicaciones web escrito en Python.
+
+'''web2py''' funciona correctamente en Python 3.
+
+'''web2py''' está basado en el modelo [https://es.wikipedia.org/wiki/Modelo%E2%80%93vista%E2%80%93controlador MVC]
+
+== Referencias ==
+
+* [https://martinfowler.com/eaaDev/uiArchs.html Evolución del modelo MVC]
+* [https://nomadphp.com/blog/60/working-with-the-thin-controller-and-fat-model-concept-in-laravel Fat models and thin controllers]
+* [https://nomadphp.com/blog/60/working-with-the-thin-controller-and-fat-model-concept-in-laravel Crítica del mantra]
+

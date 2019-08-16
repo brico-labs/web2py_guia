@@ -1,0 +1,110 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames*,x11names*}{xcolor}
+%
+\documentclass[
+  12pt,
+  spanish,
+]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+  \setmainfont[]{Ubuntu}
+  \setmonofont[]{Ubuntu Mono}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Apuntes de web2py},
+  pdfauthor={Sergio Alvariño salvari@gmail.com},
+  pdflang={es-ES},
+  colorlinks=true,
+  linkcolor=Maroon,
+  filecolor=Maroon,
+  citecolor=Blue,
+  urlcolor=Blue,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[a4paper]{geometry}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+\ifxetex
+  % Load polyglossia as late as possible: uses bidi with RTL langages (e.g. Hebrew, Arabic)
+  \usepackage{polyglossia}
+  \setmainlanguage[]{spanish}
+\else
+  \usepackage[shorthands=off,main=spanish]{babel}
+\fi
+
+\title{Apuntes de web2py}
+\author{Sergio Alvariño
+\href{mailto:salvari@gmail.com}{\nolinkurl{salvari@gmail.com}}}
+\date{Agosto-2019}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+Apuntes de web2py: Un framework para desarrollo de aplicaciones web
+\end{abstract}
+
+{
+\hypersetup{linkcolor=}
+\setcounter{tocdepth}{3}
+\tableofcontents
+}
+\hypertarget{introducciuxf3n}{%
+\section{Introducción}\label{introducciuxf3n}}
+
+\href{http://www.web2py.com/}{web2py} es un framework para desarrollo de
+aplicaciones web escrito en Python.
+
+\textbf{web2py} funciona correctamente en Python 3.
+
+\textbf{web2py} está basado en el modelo
+\href{https://es.wikipedia.org/wiki/Modelo\%E2\%80\%93vista\%E2\%80\%93controlador}{MVC}
+
+\hypertarget{referencias}{%
+\subsection{Referencias}\label{referencias}}
+
+\begin{itemize}
+\tightlist
+\item
+  \href{https://martinfowler.com/eaaDev/uiArchs.html}{Evolución del
+  modelo MVC}
+\item
+  \href{https://nomadphp.com/blog/60/working-with-the-thin-controller-and-fat-model-concept-in-laravel}{Fat
+  models and thin controllers}
+\item
+  \href{https://nomadphp.com/blog/60/working-with-the-thin-controller-and-fat-model-concept-in-laravel}{Crítica
+  del mantra}
+\end{itemize}
+
+\end{document}
