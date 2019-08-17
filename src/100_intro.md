@@ -11,12 +11,17 @@ abstract: |
 
 # Introducción
 
-[web2py](http://www.web2py.com/) es un framework para desarrollo de
+[web2py](http://www.web2py.com/) es un framework para facilitar el desarrollo de
 aplicaciones web escrito en Python.
 
-__web2py__ funciona correctamente en Python 3.
+___web2py___ funciona correctamente en Python 3. Su curva de aprendizaje
+no es tan empinada como la de Django y en muchos sentidos es más
+moderno que Django.
 
-__web2py__ está basado en el modelo [MVC](https://es.wikipedia.org/wiki/Modelo%E2%80%93vista%E2%80%93controlador)
+__web2py__ está basado (no estrictamente) en el modelo
+[MVC](https://es.wikipedia.org/wiki/Modelo%E2%80%93vista%E2%80%93controlador)
+
+__web2py__ incorpora _Bootstrap 4_
 
 ## Referencias
 
