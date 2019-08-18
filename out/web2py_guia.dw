@@ -1,8 +1,10 @@
 ====== Introducción ======
 
-[[http://www.web2py.com/|web2py]] es un framework para facilitar el desarrollo de aplicaciones web escrito en Python.
+[[http://www.web2py.com/|web2py]] es un //framework// para facilitar el desarrollo de aplicaciones web escrito en Python.
 
-**//web2py//** funciona correctamente en Python 3. Su curva de aprendizaje no es tan empinada como la de Django y en muchos sentidos es más moderno que Django.
+**//web2py//** funciona correctamente en Python 3. Su curva de aprendizaje no es tan empinada como la de [[https://www.djangoproject.com/|Django]] (que es el //framework// de aplicaciones web de referencia en Python) y en muchos sentidos es más moderno que Django.
+
+**//web2py//** tiene una [[http://www.web2py.com/init/default/documentation|documentación]] muy completa y actualizada (disponible también en castellano) y sobre todo una comunidad de usuarios y desarrolladores muy activa y que responden con rapidez a las dudas que puedas plantear.
 
 **web2py** está basado (no estrictamente) en el modelo [[https://es.wikipedia.org/wiki/Modelo%E2%80%93vista%E2%80%93controlador|MVC]]
 
@@ -10,6 +12,7 @@
 
 ===== Referencias =====
 
+  * [[http://www.web2py.com/init/default/documentation|Página de documentación y recursos de web2py, con enlaces a grupos de usuarios y tutoriales]]
   * [[https://martinfowler.com/eaaDev/uiArchs.html|Evolución del modelo MVC]]
   * [[https://nomadphp.com/blog/60/working-with-the-thin-controller-and-fat-model-concept-in-laravel|Fat models and thin controllers]]
   * [[https://nomadphp.com/blog/60/working-with-the-thin-controller-and-fat-model-concept-in-laravel|Crítica del mantra]]
@@ -18,11 +21,11 @@
 
 ===== Instalación =====
 
-Vamos a ver el proceso de instalación de una instancia de web2py en modo //standalone//. Normalmente uso web2py instalado de esta forma para entornos de desarrollo. Para un entorno de producción lo normal es instalar web2py tras un servidor web como [[https://www.apache.org/|//Apache//]] o [[https://www.nginx.com/|Nginx]], aunque dependiendo de la carga de trabajo y de como administres tus sistemas no tiene por que ser imprescindible y lo puedes poner en producción en modo //standalone//.
+Vamos a ver el proceso de instalación de una instancia de **//web2py//** en modo //standalone//. **//web2py//** instalado de esta forma es ideal para entornos de desarrollo. Para un entorno de producción puede ser más conveniente instalar **//web2py//** tras un servidor web como [[https://www.apache.org/|Apache]] o [[https://www.nginx.com/|Nginx]], aunque dependiendo de la carga de trabajo y de como administres tus sistemas no tiene por que ser imprescindible y lo puedes poner en producción en modo //standalone//.
 
 <HTML><ol style="list-style-type: decimal;"></HTML>
 <HTML><li></HTML><HTML><p></HTML>Creamos un entorno virtual<HTML></p></HTML>
-<HTML><p></HTML>Como ya hemos comentado **//web2py//** funciona ya en Python 3. Además con Python nunca está de mas encapsular nuestras pruebas y desarrollos en un entorno virtual.((<HTML><p></HTML>Los siguientes comandos asumen que tienes instalado //virtualenvwrapper// como recomendamos en la guía de postinstalación de Linux Mint, si no lo tienes tendrás que crear un virtualenv con los comandos tradicionales<HTML></p></HTML>)) Así que creamos el virtualenv que llamaremos //web2py//:<HTML></p></HTML>
+<HTML><p></HTML>Como ya hemos comentado **//web2py//** funciona ya en Python 3. Y en cualquier caso, con Python nunca está de mas encapsular nuestras pruebas y desarrollos en un entorno virtual.((<HTML><p></HTML>Los siguientes comandos asumen que tienes instalado //virtualenvwrapper// como recomendamos en la guía de postinstalación de Linux Mint, si no lo tienes te recomendamos crear un virtualenv con los comandos tradicionales<HTML></p></HTML>)) Así que creamos el virtualenv que llamaremos //web2py//:<HTML></p></HTML>
 <code>
 mkvirtualenv -p `which python3` web2py
 </code><HTML></li></HTML>
@@ -35,7 +38,7 @@ cd web2py_test
 # bajamos el programa de la web y descomprimimos
 wget https://mdipierro.pythonanywhere.com/examples/static/web2py_src.zip
 
-# opcionalmente borramos el zip, sería mejor guardarlo
+# opcionalmente borramos el zip, aunque sería mejor guardarlo
 # por si queremos hacer nuevas instalaciones
 rm web2py_src.zip
 </code><HTML></li></HTML>
@@ -66,18 +69,18 @@ An optional company name[]:Asociacion BricoLabs
 openssl x509 -req -days 365 -in server.csr \
 -signkey server.key -out server.crt
 </code><HTML></li></HTML>
-<HTML><li></HTML><HTML><p></HTML>Arrancamos el servidor:<HTML></p></HTML>
-<HTML><p></HTML>Ahora deberíamos tener los ficheros ''%%server.key%%'', ''%%server.csr%%'' y ''%%server.crt%%'' en el directorio raiz de web2py, una vez generados estos ficheros podemos arrancar el servidor con los siguientes parámetros (recuerda activar el entorno virtual si no lo tienes activo):<HTML></p></HTML>
-<code>
-python web2py.py -a 'admin_password' -c server.crt -k server.key \
--i 0.0.0.0 -p 8000
-</code>
-<HTML><p></HTML>Y ya podemos acceder nuestro server en la dirección https://localhost:8000<HTML></p></HTML><HTML></li></HTML>
 <HTML><li></HTML><HTML><p></HTML>Servidor de base de datos.<HTML></p></HTML>
 <HTML><p></HTML>Para usar **//web2py//** es imprescindible tener acceso a un servidor de base de datos. Podemos usar MySQL o MariaDB por ejemplo. Pero para empezar rápidamente vamos a tirar de [[https://www.sqlite.org/version3.html|SQLite]], un servidor fácil de instalar potente y versátil. Es importante usar la versión 3 que introduce grandes mejoras sobre el antiguo //SQLite//<HTML></p></HTML>
 <code>
 sudo apt install sqlite3
-</code><HTML></li></HTML><HTML></ol></HTML>
+</code><HTML></li></HTML>
+<HTML><li></HTML><HTML><p></HTML>Arrancamos el servidor:<HTML></p></HTML>
+<HTML><p></HTML>Deberíamos tener los ficheros generados en el paso anterior: ''%%server.key%%'', ''%%server.csr%%'' y ''%%server.crt%%'', en el directorio raiz de web2py. Podemos arrancar el servidor con los siguientes parámetros (recuerda activar el entorno virtual si no lo tienes activo):<HTML></p></HTML>
+<code>
+python web2py.py -a 'admin_password' -c server.crt -k server.key \
+-i 0.0.0.0 -p 8000
+</code>
+<HTML><p></HTML>Y ya podemos acceder nuestro server en la dirección https://localhost:8000<HTML></p></HTML><HTML></li></HTML><HTML></ol></HTML>
 
 Y ahora si que ya tenemos todo listo para empezar a usar **//web2py//**. Podemos crear nuestra primera aplicación.
 
@@ -85,11 +88,11 @@ Y ahora si que ya tenemos todo listo para empezar a usar **//web2py//**. Podemos
 
 Si tienes mucha prisa por aprender web2py puedes saltarte esta sección e ir directamente a la sección [[#nuestra-primera-aplicación|siguiente]]
 
-Si por el contrario quieres entender exactamente que hemos hecho para poder arrancar el **//web2py//** este puede ser el primer paso.
+Si por el contrario quieres entender exactamente que hemos hecho para poder arrancar el **//web2py//** continuar leyendo puede ser el primer paso.
 
   * **¿Qué es un //virtualenv//?** Python nos permite definir //virtualenv//. Un //virtualenv// es un entorno python aislado. Todos los //virtualenvs// están aislados entre si y mejor todavía son independientes del python del sistema. Esto te permite tener multiples entornos de desarrollo (o producción) cada uno con distintas versiones de python y diferentes librerias python instaladas en cada uno de ellos, o quizás diferentes versiones de las mismas librerias.
   * **¿Que es //virtualenvwrapper//?** Es un frontend para usar //virtualenv//, la herramienta nativa de python para gestionar //virtualenvs//. Es completamente opcional, aunque a mi me parece muy cómoda.
-  * **¿Qué es todo eso de los certificados?** **//web2py//** viene preparado para usar //https// (estas siglas tienen varias interpretaciones: //HTTP over TLS//, //HTTP over SSL// o //HTTP Secure//). //https// usa comunicaciones cifradas entre tu navegador y el servidor web para garantizar dos cosas: que estás accediendo al auténtico servidor y que nadie este interceptando la comunicación entre navegador y servidor.Para usar //https// hay que hacer varias cosas:
+  * **¿Qué es todo eso de los certificados?** **//web2py//** viene preparado para usar //https// (estas siglas tienen varias interpretaciones: //HTTP over TLS//, //HTTP over SSL// o //HTTP Secure//). //https// usa comunicaciones cifradas entre tu navegador y el servidor web para garantizar dos cosas: que estás accediendo al auténtico servidor y que nadie este interceptando la comunicación entre navegador y servidor. En particular **//web2py//** exige que se use //https// para conectarse a las páginas de administración. Así que si no generas los certificados podrás arrancar y conectar con **//web2py//** pero no podrás hacer demasiadas cosas.Para usar //https// hay que hacer varias cosas:
     * Generar un CSR (Certificate Signing Request)
     * Obtener con ese CSR un certificado SSL de una autoridad certificadora (CA)
     * O alternativamente generar nosotros un certificado a partir del CSRLo que hemos hecho con los comandos //openssl// ha sido:
@@ -98,6 +101,8 @@ Si por el contrario quieres entender exactamente que hemos hecho para poder arra
     * Generar un certificado firmándolo nosotros mismos con esa misma clave como si fueramos la autoridad certificadora.Esto nos vale para arrancar **//web2py//** aunque nuestro navegador nos dará una alerta de riesgo de seguridad por que no reconoce a la CA.
 
 [[https://www.digitalocean.com/community/tutorials/openssl-essentials-working-with-ssl-certificates-private-keys-and-csrs|Más info de //openssl//]]
+
+  * **¿Qué es un motor de base de datos?** **//web2py//** usa un motor (o gestor) de [[https://es.wikipedia.org/wiki/Base_de_datos_relacional|base de datos relacional]]. Puede usar muchos, incluyendo los más populares como por ejemplo MySQL, Postgres o MariaDB.Las bases de datos relacionales se basan en relaciones. Las relaciones primarias son tablas que almacenan registros (filas) con atributos comunes (columnas). Las relaciones derivadas se establecen entre distintas tablas mediante consultas (queries) o vistas (views)**//web2py//** te permite gestionar y utilizar las bases de datos a muy alto nivel, así que podras usarlo sin saber practicamente de bases de datos; pero no es demasiado difícil aprender los conceptos básicos y compensa ;-) Todo lo que puedas aprender de bases de datos te ayudará a hacer mejores aplicaciones web.
 
 ===== Nuestra primera aplicación =====
 
@@ -127,7 +132,8 @@ En la sección ''%%[app]%%'' del fichero podemos configurar el nombre de la apli
 
 En la sección ''%%[db]%%'' fichero configuramos el motor de base de datos que vamos a usar en nuestra aplicación. Por defecto viene configurado //sqlite// así que no vamos a tener que cambiar nada en este sentido.
 
-En la seccion ''%%[smtp]%%'' podemos configurar el gateway de correo que usará la aplicación para enviar correos a los usuarios. Por defecto viene viene la configuración para usar una cuenta de gmail como gateway, solo tenemos que cubrir los valores de usuario y password y la dirección de correo.
+En la seccion ''%%[smtp]%%'' podemos configurar el gateway de correo que usará la aplicación para enviar correos a los usuarios. Por defecto viene viene la configuración para usar una cuenta de gmail como gateway, solo tenemos que cubrir los valores de usuario y password y la dirección de correo.((Es aconsejable crear una cuenta de gmail, o cualquier otro servicio siminar, para pruebas, no se te ocurra usar la tuya
+))
 
 ==== El Modelo ====
 
@@ -147,6 +153,61 @@ Y por último si vemos //database administration// podremos ver las tablas cread
 
 También podemos echar un ojo al contenido del fichero ''%%db.py%%'' o ''%%menu.py%%'' pero por el momento **no** vamos a modificar nada en esos ficheros.
 
+Ahora tenemos que ampliar el modelo y añadir todo lo que consideremos necesario para nuestra aplicación.
+
+=== Diseñando el modelo ===
+
+//Build fat models and thin controllers// es uno de los lemas del modelo MVC, no vamos a entrar en detalles de momento pero un modelo bien diseñado nos va a ahorrar muchísimo trabajo al construir la aplicación.
+
+El diseño de bases de datos es una rama de la ingeniería en si mismo, hay camiones de libros escritos sobre el tema y todo tipo de herramientas para ayudar al diseñador. Pero nosotros nos vamos a centrar en usar sólo lo que nos ofrece **//web2py//**.
+
+Vamos a definir el modelo (tablas) de nuestra aplicación en un nuevo fichero de la sección //Models//, que llamaremos ''%%db_custom%%'' así que pulsamos en el botón //Create//, y creamos el fichero ''%%db_custom%%''.
+
+{{src/img/create_db_custom.png| Crear fichero}}
+
+**//web2py//** parsea todos los ficheros de la sección //Models// por orden alfabético. Es importante que ''%%db.py%%'' sea siempre el primero. **//web2py//** se encarga también de añadir la extensión ''%%.py%%'' al nuevo fichero que hemos creado.
+
+El objetivo de nuestra aplicación es mantener un inventario de “cosas”. Parece lógico que nuestra primera tabla valga para almacenar “cosas”. Así que en el fichero ''%%db_custom.py%%'' añadimos las siguientes lineas y salvamos el fichero:
+
+<code>
+db.define_table('thing',
+    Field('id', 'integer'),
+    Field('desc', 'string'),
+    migrate = True);
+</code>
+Ya hemos salvado nuestro fichero, vamos a echar un ojo a nuestra base de datos con el botón //Graph Model//.
+
+{{src/img/internal_error.jpg| Error interno}}
+
+¡Tenemos un horror! ¿Qué ha pasado?. Si pinchamos en el link del //Ticket// se abrirá una nueva pestaña en nuestro navegador:
+
+{{src/img/error_reserved_sql.jpg| Error palabra reservada SQL}}
+
+En el ticket tenemos mucha información acerca del error, afortunadamente en este caso es facilito. El nombre del campo ''%%desc%%'' que hemos añadido a nuestra tabla ''%%thing%%'' es una palabra reservada en **todas** las variedades de //SQL// (es el comando para ver la definición de una tabla: //desc tablename//)
+
+Editamos de nuevo nuestro fichero ''%%db_custom.py%%'' y corregimos el contenido:
+
+<code>
+db.define_table('thing',
+    Field('id', 'integer'),
+    Field('description', 'string'),
+    migrate = True);
+</code>
+¡Ahora si! Si pulsamos en el botón de //Graph Model// (después de salvar el nuevo contenido) veremos que **//web2py//** ha creado la nueva tabla en la base de datos. Incluso podríamos empezar a añadir filas (cosas) a nuestra tabla desde el //database administration//
+
+El campo ''%%id%%'' es //casi// obligatorio en todas las tablas que definamos en **//web2py//**, siempre será un valor único para cada fila en una tabla y se usará internamente como clave primaria. Podemos usar otros campos como clave primaria pero de momento mantendremos las cosas símples.
+
+Nuestro modelo de “cosa” es demasiado simple, podemos añadirle nuevos atributos de [[http://web2py.com/books/default/chapter/29/06/the-database-abstraction-layer#Field-types|distintos tipos]].
+
+<code>
+db.define_table('thing',
+    Field('id', 'integer'),
+    Field('description', 'string'),
+    Field('created_on, 'datetime'),
+    Field('created_by, 'reference auth_user', default = auth.user_id),
+    Field('updated_on, 'datetime'),
+    migrate = True);
+</code>
 ====== Secciones en el futuro ======
 
 ===== web2py y git =====

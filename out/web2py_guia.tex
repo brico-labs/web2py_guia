@@ -96,12 +96,20 @@ Apuntes de web2py: Un framework para desarrollo de aplicaciones web
 \hypertarget{introducciuxf3n}{%
 \section{Introducción}\label{introducciuxf3n}}
 
-\href{http://www.web2py.com/}{web2py} es un framework para facilitar el
-desarrollo de aplicaciones web escrito en Python.
+\href{http://www.web2py.com/}{web2py} es un \emph{framework} para
+facilitar el desarrollo de aplicaciones web escrito en Python.
 
 \textbf{\emph{web2py}} funciona correctamente en Python 3. Su curva de
-aprendizaje no es tan empinada como la de Django y en muchos sentidos es
-más moderno que Django.
+aprendizaje no es tan empinada como la de
+\href{https://www.djangoproject.com/}{Django} (que es el
+\emph{framework} de aplicaciones web de referencia en Python) y en
+muchos sentidos es más moderno que Django.
+
+\textbf{\emph{web2py}} tiene una
+\href{http://www.web2py.com/init/default/documentation}{documentación}
+muy completa y actualizada (disponible también en castellano) y sobre
+todo una comunidad de usuarios y desarrolladores muy activa y que
+responden con rapidez a las dudas que puedas plantear.
 
 \textbf{web2py} está basado (no estrictamente) en el modelo
 \href{https://es.wikipedia.org/wiki/Modelo\%E2\%80\%93vista\%E2\%80\%93controlador}{MVC}
@@ -113,6 +121,10 @@ más moderno que Django.
 
 \begin{itemize}
 \tightlist
+\item
+  \href{http://www.web2py.com/init/default/documentation}{Página de
+  documentación y recursos de web2py, con enlaces a grupos de usuarios y
+  tutoriales}
 \item
   \href{https://martinfowler.com/eaaDev/uiArchs.html}{Evolución del
   modelo MVC}
@@ -130,11 +142,12 @@ más moderno que Django.
 \hypertarget{instalaciuxf3n}{%
 \subsection{Instalación}\label{instalaciuxf3n}}
 
-Vamos a ver el proceso de instalación de una instancia de web2py en modo
-\emph{standalone}. Normalmente uso web2py instalado de esta forma para
-entornos de desarrollo. Para un entorno de producción lo normal es
-instalar web2py tras un servidor web como
-\href{https://www.apache.org/}{\emph{Apache}} o
+Vamos a ver el proceso de instalación de una instancia de
+\textbf{\emph{web2py}} en modo \emph{standalone}. \textbf{\emph{web2py}}
+instalado de esta forma es ideal para entornos de desarrollo. Para un
+entorno de producción puede ser más conveniente instalar
+\textbf{\emph{web2py}} tras un servidor web como
+\href{https://www.apache.org/}{Apache} o
 \href{https://www.nginx.com/}{Nginx}, aunque dependiendo de la carga de
 trabajo y de como administres tus sistemas no tiene por que ser
 imprescindible y lo puedes poner en producción en modo
@@ -146,13 +159,13 @@ imprescindible y lo puedes poner en producción en modo
   Creamos un entorno virtual
 
   Como ya hemos comentado \textbf{\emph{web2py}} funciona ya en Python
-  3. Además con Python nunca está de mas encapsular nuestras pruebas y
-  desarrollos en un entorno virtual.\footnote{Los siguientes comandos
-    asumen que tienes instalado \emph{virtualenvwrapper} como
-    recomendamos en la guía de postinstalación de Linux Mint, si no lo
-    tienes tendrás que crear un virtualenv con los comandos
-    tradicionales} Así que creamos el virtualenv que llamaremos
-  \emph{web2py}:
+  3. Y en cualquier caso, con Python nunca está de mas encapsular
+  nuestras pruebas y desarrollos en un entorno virtual.\footnote{Los
+    siguientes comandos asumen que tienes instalado
+    \emph{virtualenvwrapper} como recomendamos en la guía de
+    postinstalación de Linux Mint, si no lo tienes te recomendamos crear
+    un virtualenv con los comandos tradicionales} Así que creamos el
+  virtualenv que llamaremos \emph{web2py}:
 
 \begin{verbatim}
 mkvirtualenv -p `which python3` web2py
@@ -168,7 +181,7 @@ cd web2py_test
 # bajamos el programa de la web y descomprimimos
 wget https://mdipierro.pythonanywhere.com/examples/static/web2py_src.zip
 
-# opcionalmente borramos el zip, sería mejor guardarlo
+# opcionalmente borramos el zip, aunque sería mejor guardarlo
 # por si queremos hacer nuevas instalaciones
 rm web2py_src.zip
 \end{verbatim}
@@ -206,22 +219,6 @@ openssl x509 -req -days 365 -in server.csr \
 -signkey server.key -out server.crt
 \end{verbatim}
 \item
-  Arrancamos el servidor:
-
-  Ahora deberíamos tener los ficheros \texttt{server.key},
-  \texttt{server.csr} y \texttt{server.crt} en el directorio raiz de
-  web2py, una vez generados estos ficheros podemos arrancar el servidor
-  con los siguientes parámetros (recuerda activar el entorno virtual si
-  no lo tienes activo):
-
-\begin{verbatim}
-python web2py.py -a 'admin_password' -c server.crt -k server.key \
--i 0.0.0.0 -p 8000
-\end{verbatim}
-
-  Y ya podemos acceder nuestro server en la dirección
-  \url{https://localhost:8000}
-\item
   Servidor de base de datos.
 
   Para usar \textbf{\emph{web2py}} es imprescindible tener acceso a un
@@ -234,6 +231,22 @@ python web2py.py -a 'admin_password' -c server.crt -k server.key \
 \begin{verbatim}
 sudo apt install sqlite3
 \end{verbatim}
+\item
+  Arrancamos el servidor:
+
+  Deberíamos tener los ficheros generados en el paso anterior:
+  \texttt{server.key}, \texttt{server.csr} y \texttt{server.crt}, en el
+  directorio raiz de web2py. Podemos arrancar el servidor con los
+  siguientes parámetros (recuerda activar el entorno virtual si no lo
+  tienes activo):
+
+\begin{verbatim}
+python web2py.py -a 'admin_password' -c server.crt -k server.key \
+-i 0.0.0.0 -p 8000
+\end{verbatim}
+
+  Y ya podemos acceder nuestro server en la dirección
+  \url{https://localhost:8000}
 \end{enumerate}
 
 Y ahora si que ya tenemos todo listo para empezar a usar
@@ -247,7 +260,8 @@ ir directamente a la sección
 \protect\hyperlink{nuestra-primera-aplicaciuxf3n}{siguiente}
 
 Si por el contrario quieres entender exactamente que hemos hecho para
-poder arrancar el \textbf{\emph{web2py}} este puede ser el primer paso.
+poder arrancar el \textbf{\emph{web2py}} continuar leyendo puede ser el
+primer paso.
 
 \begin{description}
 \item[¿Qué es un \emph{virtualenv}?]
@@ -268,7 +282,11 @@ siglas tienen varias interpretaciones: \emph{HTTP over TLS}, \emph{HTTP
 over SSL} o \emph{HTTP Secure}). \emph{https} usa comunicaciones
 cifradas entre tu navegador y el servidor web para garantizar dos cosas:
 que estás accediendo al auténtico servidor y que nadie este
-interceptando la comunicación entre navegador y servidor.
+interceptando la comunicación entre navegador y servidor. En particular
+\textbf{\emph{web2py}} exige que se use \emph{https} para conectarse a
+las páginas de administración. Así que si no generas los certificados
+podrás arrancar y conectar con \textbf{\emph{web2py}} pero no podrás
+hacer demasiadas cosas.
 
 Para usar \emph{https} hay que hacer varias cosas:
 
@@ -305,6 +323,25 @@ a la CA.
 
 \href{https://www.digitalocean.com/community/tutorials/openssl-essentials-working-with-ssl-certificates-private-keys-and-csrs}{Más
 info de \emph{openssl}}
+
+\begin{description}
+\item[¿Qué es un motor de base de datos?]
+\textbf{\emph{web2py}} usa un motor (o gestor) de
+\href{https://es.wikipedia.org/wiki/Base_de_datos_relacional}{base de
+datos relacional}. Puede usar muchos, incluyendo los más populares como
+por ejemplo MySQL, Postgres o MariaDB.
+
+Las bases de datos relacionales se basan en relaciones. Las relaciones
+primarias son tablas que almacenan registros (filas) con atributos
+comunes (columnas). Las relaciones derivadas se establecen entre
+distintas tablas mediante consultas (queries) o vistas (views)
+
+\textbf{\emph{web2py}} te permite gestionar y utilizar las bases de
+datos a muy alto nivel, así que podras usarlo sin saber practicamente de
+bases de datos; pero no es demasiado difícil aprender los conceptos
+básicos y compensa ;-) Todo lo que puedas aprender de bases de datos te
+ayudará a hacer mejores aplicaciones web.
+\end{description}
 
 \hypertarget{nuestra-primera-aplicaciuxf3n}{%
 \subsection{Nuestra primera
@@ -367,7 +404,9 @@ En la seccion \texttt{{[}smtp{]}} podemos configurar el gateway de
 correo que usará la aplicación para enviar correos a los usuarios. Por
 defecto viene viene la configuración para usar una cuenta de gmail como
 gateway, solo tenemos que cubrir los valores de usuario y password y la
-dirección de correo.
+dirección de correo.\footnote{Es aconsejable crear una cuenta de gmail,
+  o cualquier otro servicio siminar, para pruebas, no se te ocurra usar
+  la tuya}
 
 \hypertarget{el-modelo}{%
 \subsubsection{El Modelo}\label{el-modelo}}
@@ -402,6 +441,109 @@ esas tablas.
 También podemos echar un ojo al contenido del fichero \texttt{db.py} o
 \texttt{menu.py} pero por el momento \textbf{no} vamos a modificar nada
 en esos ficheros.
+
+Ahora tenemos que ampliar el modelo y añadir todo lo que consideremos
+necesario para nuestra aplicación.
+
+\hypertarget{diseuxf1ando-el-modelo}{%
+\paragraph{Diseñando el modelo}\label{diseuxf1ando-el-modelo}}
+
+\emph{Build fat models and thin controllers} es uno de los lemas del
+modelo MVC, no vamos a entrar en detalles de momento pero un modelo bien
+diseñado nos va a ahorrar muchísimo trabajo al construir la aplicación.
+
+El diseño de bases de datos es una rama de la ingeniería en si mismo,
+hay camiones de libros escritos sobre el tema y todo tipo de
+herramientas para ayudar al diseñador. Pero nosotros nos vamos a centrar
+en usar sólo lo que nos ofrece \textbf{\emph{web2py}}.
+
+Vamos a definir el modelo (tablas) de nuestra aplicación en un nuevo
+fichero de la sección \emph{Models}, que llamaremos \texttt{db\_custom}
+así que pulsamos en el botón \emph{Create}, y creamos el fichero
+\texttt{db\_custom}.
+
+\begin{figure}
+\centering
+\includegraphics{src/img/create_db_custom.png}
+\caption{Crear fichero}
+\end{figure}
+
+\textbf{\emph{web2py}} parsea todos los ficheros de la sección
+\emph{Models} por orden alfabético. Es importante que \texttt{db.py} sea
+siempre el primero. \textbf{\emph{web2py}} se encarga también de añadir
+la extensión \texttt{.py} al nuevo fichero que hemos creado.
+
+El objetivo de nuestra aplicación es mantener un inventario de
+``cosas''. Parece lógico que nuestra primera tabla valga para almacenar
+``cosas''. Así que en el fichero \texttt{db\_custom.py} añadimos las
+siguientes lineas y salvamos el fichero:
+
+\begin{verbatim}
+db.define_table('thing',
+    Field('id', 'integer'),
+    Field('desc', 'string'),
+    migrate = True);
+\end{verbatim}
+
+Ya hemos salvado nuestro fichero, vamos a echar un ojo a nuestra base de
+datos con el botón \emph{Graph Model}.
+
+\begin{figure}
+\centering
+\includegraphics{src/img/internal_error.jpg}
+\caption{Error interno}
+\end{figure}
+
+¡Tenemos un horror! ¿Qué ha pasado?. Si pinchamos en el link del
+\emph{Ticket} se abrirá una nueva pestaña en nuestro navegador:
+
+\begin{figure}
+\centering
+\includegraphics{src/img/error_reserved_sql.jpg}
+\caption{Error palabra reservada SQL}
+\end{figure}
+
+En el ticket tenemos mucha información acerca del error, afortunadamente
+en este caso es facilito. El nombre del campo \texttt{desc} que hemos
+añadido a nuestra tabla \texttt{thing} es una palabra reservada en
+\textbf{todas} las variedades de \emph{SQL} (es el comando para ver la
+definición de una tabla: \emph{desc tablename})
+
+Editamos de nuevo nuestro fichero \texttt{db\_custom.py} y corregimos el
+contenido:
+
+\begin{verbatim}
+db.define_table('thing',
+    Field('id', 'integer'),
+    Field('description', 'string'),
+    migrate = True);
+\end{verbatim}
+
+¡Ahora si! Si pulsamos en el botón de \emph{Graph Model} (después de
+salvar el nuevo contenido) veremos que \textbf{\emph{web2py}} ha creado
+la nueva tabla en la base de datos. Incluso podríamos empezar a añadir
+filas (cosas) a nuestra tabla desde el \emph{database administration}
+
+El campo \texttt{id} es \emph{casi} obligatorio en todas las tablas que
+definamos en \textbf{\emph{web2py}}, siempre será un valor único para
+cada fila en una tabla y se usará internamente como clave primaria.
+Podemos usar otros campos como clave primaria pero de momento
+mantendremos las cosas símples.
+
+Nuestro modelo de ``cosa'' es demasiado simple, podemos añadirle nuevos
+atributos de
+\href{http://web2py.com/books/default/chapter/29/06/the-database-abstraction-layer\#Field-types}{distintos
+tipos}.
+
+\begin{verbatim}
+db.define_table('thing',
+    Field('id', 'integer'),
+    Field('description', 'string'),
+    Field('created_on, 'datetime'),
+    Field('created_by, 'reference auth_user', default = auth.user_id),
+    Field('updated_on, 'datetime'),
+    migrate = True);
+\end{verbatim}
 
 \hypertarget{secciones-en-el-futuro}{%
 \section{Secciones en el futuro}\label{secciones-en-el-futuro}}

@@ -2,24 +2,25 @@
 
 ## Instalación
 
-Vamos a ver el proceso de instalación de una instancia de web2py en
-modo _standalone_. Normalmente uso web2py instalado de esta forma para
-entornos de desarrollo. Para un entorno de producción lo normal es
-instalar web2py tras un servidor web como
-[_Apache_](https://www.apache.org/) o [Nginx](https://www.nginx.com/),
+Vamos a ver el proceso de instalación de una instancia de ___web2py___
+en modo _standalone_. ___web2py___ instalado de esta forma es ideal
+para entornos de desarrollo. Para un entorno de producción puede ser
+más conveniente instalar ___web2py___ tras un servidor web como
+[Apache](https://www.apache.org/) o [Nginx](https://www.nginx.com/),
 aunque dependiendo de la carga de trabajo y de como administres tus
 sistemas no tiene por que ser imprescindible y lo puedes poner en
 producción en modo _standalone_.
 
 1. Creamos un entorno virtual
 
-   Como ya hemos comentado ___web2py___ funciona ya en Python 3. Además
-   con Python nunca está de mas encapsular nuestras pruebas y desarrollos
-   en un entorno virtual.^[Los siguientes comandos asumen que tienes
-   instalado _virtualenvwrapper_ como recomendamos en la guía de
-   postinstalación de Linux Mint, si no lo tienes tendrás que crear un
-   virtualenv con los comandos tradicionales] Así que creamos el
-   virtualenv que llamaremos _web2py_:
+   Como ya hemos comentado ___web2py___ funciona ya en Python 3. Y en
+   cualquier caso, con Python nunca está de mas encapsular nuestras
+   pruebas y desarrollos en un entorno virtual.^[Los siguientes
+   comandos asumen que tienes instalado _virtualenvwrapper_ como
+   recomendamos en la guía de postinstalación de Linux Mint, si no lo
+   tienes te recomendamos crear un virtualenv con los comandos
+   tradicionales] Así que creamos el virtualenv que llamaremos
+   _web2py_:
 
    ~~~~
    mkvirtualenv -p `which python3` web2py
@@ -35,7 +36,7 @@ producción en modo _standalone_.
    # bajamos el programa de la web y descomprimimos
    wget https://mdipierro.pythonanywhere.com/examples/static/web2py_src.zip
 
-   # opcionalmente borramos el zip, sería mejor guardarlo
+   # opcionalmente borramos el zip, aunque sería mejor guardarlo
    # por si queremos hacer nuevas instalaciones
    rm web2py_src.zip
    ~~~~
@@ -73,21 +74,6 @@ producción en modo _standalone_.
    -signkey server.key -out server.crt
    ~~~~
 
-#. Arrancamos el servidor:
-
-   Ahora deberíamos tener los ficheros `server.key`, `server.csr` y
-   `server.crt` en el directorio raiz de web2py, una vez generados
-   estos ficheros podemos arrancar el servidor con los siguientes
-   parámetros (recuerda activar el entorno virtual si no lo tienes
-   activo):
-
-   ~~~~{bash}
-   python web2py.py -a 'admin_password' -c server.crt -k server.key \
-   -i 0.0.0.0 -p 8000
-   ~~~~
-
-   Y ya podemos acceder nuestro server en la dirección <https://localhost:8000>
-   
 #. Servidor de base de datos.
    
    Para usar ___web2py___ es imprescindible tener acceso a un servidor
@@ -101,6 +87,21 @@ producción en modo _standalone_.
    sudo apt install sqlite3
    ~~~~
 
+#. Arrancamos el servidor:
+
+   Deberíamos tener los ficheros generados en el paso anterior:
+   `server.key`, `server.csr` y `server.crt`, en el directorio raiz de
+   web2py. Podemos arrancar el servidor con los siguientes parámetros
+   (recuerda activar el entorno virtual si no lo tienes activo):
+
+   ~~~~{bash}
+   python web2py.py -a 'admin_password' -c server.crt -k server.key \
+   -i 0.0.0.0 -p 8000
+   ~~~~
+
+   Y ya podemos acceder nuestro server en la dirección <https://localhost:8000>
+   
+
 Y ahora si que ya tenemos todo listo para empezar a usar ___web2py___.
 Podemos crear nuestra primera aplicación.
 
@@ -110,7 +111,8 @@ Si tienes mucha prisa por aprender web2py puedes saltarte esta
 sección e ir directamente a la sección [siguiente](#nuestra-primera-aplicación)
 
 Si por el contrario quieres entender exactamente que hemos hecho para
-poder arrancar el ___web2py___ este puede ser el primer paso.
+poder arrancar el ___web2py___ continuar leyendo puede ser el primer
+paso.
 
 ¿Qué es un _virtualenv_?
 
@@ -131,11 +133,14 @@ poder arrancar el ___web2py___ este puede ser el primer paso.
 ¿Qué es todo eso de los certificados?
 
 : ___web2py___ viene preparado para usar _https_ (estas siglas tienen
-  varias interpretaciones: _HTTP over TLS_, _HTTP over SSL_ o _HTTP Secure_).
-  _https_ usa comunicaciones cifradas entre tu navegador y el servidor
-  web para garantizar dos cosas: que estás accediendo al auténtico
-  servidor y que nadie este interceptando la comunicación entre
-  navegador y servidor.
+  varias interpretaciones: _HTTP over TLS_, _HTTP over SSL_ o _HTTP
+  Secure_). _https_ usa comunicaciones cifradas entre tu navegador y
+  el servidor web para garantizar dos cosas: que estás accediendo al
+  auténtico servidor y que nadie este interceptando la comunicación
+  entre navegador y servidor. En particular ___web2py___ exige que se
+  use _https_ para conectarse a las páginas de administración. Así que
+  si no generas los certificados podrás arrancar y conectar con
+  ___web2py___ pero no podrás hacer demasiadas cosas.
 
 : Para usar _https_ hay que hacer varias cosas:
 
@@ -158,6 +163,23 @@ poder arrancar el ___web2py___ este puede ser el primer paso.
   
 [Más info de _openssl_](https://www.digitalocean.com/community/tutorials/openssl-essentials-working-with-ssl-certificates-private-keys-and-csrs)
 
+¿Qué es un motor de base de datos?
+
+: ___web2py___ usa un motor (o gestor) de [base de datos
+  relacional](https://es.wikipedia.org/wiki/Base_de_datos_relacional).
+  Puede usar muchos, incluyendo los más populares como por ejemplo
+  MySQL, Postgres o MariaDB.
+  
+: Las bases de datos relacionales se basan en relaciones. Las
+  relaciones primarias son tablas que almacenan registros (filas) con
+  atributos comunes (columnas). Las relaciones derivadas se establecen
+  entre distintas tablas mediante consultas (queries) o vistas (views)
+  
+: ___web2py___ te permite gestionar y utilizar las bases de datos a
+  muy alto nivel, así que podras usarlo sin saber practicamente de
+  bases de datos; pero no es demasiado difícil aprender los conceptos
+  básicos y compensa ;-) Todo lo que puedas aprender de bases de datos
+  te ayudará a hacer mejores aplicaciones web.
 
 ## Nuestra primera aplicación
 
@@ -207,7 +229,9 @@ En la seccion `[smtp]` podemos configurar el gateway de correo que
 usará la aplicación para enviar correos a los usuarios. Por defecto
 viene viene la configuración para usar una cuenta de gmail como
 gateway, solo tenemos que cubrir los valores de usuario y password y
-la dirección de correo.
+la dirección de correo.^[Es aconsejable crear una cuenta de gmail, o
+cualquier otro servicio siminar, para pruebas, no se te ocurra usar la
+tuya]
 
 
 ### El Modelo
@@ -238,7 +262,95 @@ También podemos echar un ojo al contenido del fichero `db.py` o
 `menu.py` pero por el momento __no__ vamos a modificar nada en esos
 ficheros.
 
+Ahora tenemos que ampliar el modelo y añadir todo lo que consideremos
+necesario para nuestra aplicación.
 
+#### Diseñando el modelo
+
+_Build fat models and thin controllers_ es uno de los lemas del modelo
+MVC, no vamos a entrar en detalles de momento pero un modelo bien
+diseñado nos va a ahorrar muchísimo trabajo al construir la
+aplicación.
+
+El diseño de bases de datos es una rama de la ingeniería en si mismo,
+hay camiones de libros escritos sobre el tema y todo tipo de
+herramientas para ayudar al diseñador. Pero nosotros nos vamos a
+centrar en usar sólo lo que nos ofrece ___web2py___.
+
+Vamos a definir el modelo (tablas) de nuestra aplicación en un nuevo
+fichero de la sección _Models_, que llamaremos `db_custom` así que pulsamos en el botón _Create_,
+y creamos el fichero `db_custom`.
+
+![Crear fichero](src/img/create_db_custom.png)
+
+___web2py___ parsea todos los ficheros de la sección _Models_ por
+orden alfabético. Es importante que `db.py` sea siempre el primero.
+___web2py___ se encarga también de añadir la extensión `.py` al nuevo
+fichero que hemos creado.
+
+
+El objetivo de nuestra aplicación es mantener un inventario de
+"cosas". Parece lógico que nuestra primera tabla valga para almacenar
+"cosas". Así que en el fichero `db_custom.py` añadimos las siguientes
+lineas y salvamos el fichero:
+
+~~~~{python}
+db.define_table('thing',
+    Field('id', 'integer'),
+    Field('desc', 'string'),
+    migrate = True);
+~~~~
+
+Ya hemos salvado nuestro fichero, vamos a echar un ojo a nuestra base
+de datos con el botón _Graph Model_.
+
+![Error interno](src/img/internal_error.jpg)
+
+¡Tenemos un horror! ¿Qué ha pasado?. Si pinchamos en el link del _Ticket_
+se abrirá una nueva pestaña en nuestro navegador:
+
+![Error palabra reservada SQL](src/img/error_reserved_sql.jpg)
+
+En el ticket tenemos mucha información acerca del error,
+afortunadamente en este caso es facilito. El nombre del campo `desc`
+que hemos añadido a nuestra tabla `thing` es una palabra reservada en
+__todas__ las variedades de _SQL_ (es el comando para ver la
+definición de una tabla: _desc tablename_)
+
+Editamos de nuevo nuestro fichero `db_custom.py` y corregimos el
+contenido:
+
+~~~~{python}
+db.define_table('thing',
+    Field('id', 'integer'),
+    Field('description', 'string'),
+    migrate = True);
+~~~~
+
+¡Ahora si! Si pulsamos en el botón de _Graph Model_ (después de salvar
+el nuevo contenido) veremos que ___web2py___ ha creado la nueva tabla
+en la base de datos. Incluso podríamos empezar a añadir filas (cosas)
+a nuestra tabla desde el _database administration_
+
+El campo `id` es _casi_ obligatorio en todas las tablas que definamos
+en ___web2py___, siempre será un valor único para cada fila en una
+tabla y se usará internamente como clave primaria. Podemos usar otros
+campos como clave primaria pero de momento mantendremos las cosas
+símples.
+
+Nuestro modelo de "cosa" es demasiado simple, podemos añadirle nuevos
+atributos de [distintos
+tipos](http://web2py.com/books/default/chapter/29/06/the-database-abstraction-layer#Field-types).
+
+~~~~{python}
+db.define_table('thing',
+    Field('id', 'integer'),
+    Field('description', 'string'),
+    Field('created_on, 'datetime'),
+    Field('created_by, 'reference auth_user', default = auth.user_id),
+    Field('updated_on, 'datetime'),
+    migrate = True);
+~~~~
 
 
 
