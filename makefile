@@ -54,7 +54,7 @@ $(output)/$(target).mw: $(sources)
 
 # dokuwiki  -- buid dokuwiki file into output directory
 dokuwiki: $(output)/$(target).mw $(sources)
-$(output)/$(target).mw: $(sources)
+$(output)/$(target).dw: $(sources)
 	pandoc --from markdown --to dokuwiki \
 	--output=$(output)/$(target).dw \
 	$(sources)
