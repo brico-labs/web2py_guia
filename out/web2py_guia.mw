@@ -241,7 +241,7 @@ Hemos añadido un atributo <code>qty</code> (cantidad), hemos especificado que t
 
 El <code>label</code> se usará en los formularios en lugar del nombre del campo en la base de datos. Si vamos a añadir una nueva “cosa” veremos que en el formulario no aparece ''qty'' sino que nos pregunta ''Quantity''. Además, y esto es muy importante, hemos asignado el valor de la etiqueta con la función <code>T()</code>.
 
-'''''web2py''''' incorpora un sistema completo de internacionalización. Al usar la función <code>T()</code> la cadena ''Quantity'' se ha añadido a todos los diccionarios de traducción (si es que no estaba ya) y solo tenemos que añadir la traducción en el diccionario correspondiente (p.ej. a <code>es.py</code>) para que funcione la i16n. Una vez añadida si el idioma por defecto de nuestro navegador es el castellano, en el formulario aparecerá “Cantidad” en lugar de ''Quantity''.
+'''''web2py''''' incorpora un sistema completo de internacionalización. Al usar la función <code>T()</code> la cadena ''Quantity'' se ha añadido a todos los diccionarios de traducción (si es que no estaba ya) y solo tenemos que añadir la traducción en el diccionario correspondiente (p.ej. a <code>es.py</code>) para que funcione la i18n. Una vez añadida si el idioma por defecto de nuestro navegador es el castellano, en el formulario aparecerá “Cantidad” en lugar de ''Quantity''.
 
 Por último hemos añadido el <code>format</code> a la definición de la tabla, <code>format</code> especifica que cuando nos refiramos a un objeto “cosa” se represente por defecto con su atributo <code>name</code>.
 

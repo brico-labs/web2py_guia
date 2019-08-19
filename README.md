@@ -465,7 +465,7 @@ función `T()`.
 usar la función `T()` la cadena *Quantity* se ha añadido a todos los
 diccionarios de traducción (si es que no estaba ya) y solo tenemos que
 añadir la traducción en el diccionario correspondiente (p.ej. a
-`es.py`) para que funcione la i16n. Una vez añadida si el idioma por
+`es.py`) para que funcione la i18n. Una vez añadida si el idioma por
 defecto de nuestro navegador es el castellano, en el formulario
 aparecerá “Cantidad” en lugar de *Quantity*.
 
