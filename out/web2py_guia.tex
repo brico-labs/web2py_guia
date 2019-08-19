@@ -680,18 +680,24 @@ db.define_table('provider',
     migrate = True);
 \end{verbatim}
 
-Y ahora a la tabla \texttt{thing} le añadimos la referencia a
+Y ahora, a la tabla \texttt{thing}, le añadimos la referencia a
 proveedores:
-\textasciitilde\textasciitilde\textasciitilde\textasciitilde\{python\}
 
-db.define\_table(`thing', Field(`id', `integer'), Field(`name',
-`string', requires = IS\_NOT\_EMPTY(error\_message=`cannot be empty')),
-Field(`description', `string'), Field(`qty', `integer', default=1,
-label=T(`Quantity')), Field(`picture', `upload'), Field(`created\_on',
-`datetime'), Field(`provider\_id', `reference provider',
-requires=IS\_EMPTY\_OR(IS\_IN\_DB(db, `provider.id', `\%(name)s'))),
-format=`\%(name)s', migrate = True);
-\textasciitilde\textasciitilde\textasciitilde\textasciitilde{}
+\begin{verbatim}
+
+db.define_table('thing',
+    Field('id', 'integer'),
+    Field('name', 'string', 
+          requires = IS_NOT_EMPTY(error_message='cannot be empty')),
+    Field('description', 'string'),
+    Field('qty', 'integer', default=1, label=T('Quantity')),
+    Field('picture', 'upload'),
+    Field('created_on', 'datetime'),
+    Field('provider_id', 'reference provider',
+          requires=IS_EMPTY_OR(IS_IN_DB(db, 'provider.id', '%(name)s'))),
+    format='%(name)s',
+    migrate = True);
+\end{verbatim}
 
 \hypertarget{secciones-en-el-futuro}{%
 \section{Secciones en el futuro}\label{secciones-en-el-futuro}}

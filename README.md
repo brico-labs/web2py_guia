@@ -495,16 +495,23 @@ db.define_table('provider',
     migrate = True);
 ```
 
-Y ahora a la tabla `thing` le añadimos la referencia a proveedores:
-\~\~\~\~{python}
+Y ahora, a la tabla `thing`, le añadimos la referencia a proveedores:
 
-db.define\_table(‘thing’, Field(‘id’, ‘integer’), Field(‘name’,
-‘string’, requires = IS\_NOT\_EMPTY(error\_message=‘cannot be
-empty’)), Field(‘description’, ‘string’), Field(‘qty’, ‘integer’,
-default=1, label=T(‘Quantity’)), Field(‘picture’, ‘upload’),
-Field(‘created\_on’, ‘datetime’), Field(‘provider\_id’, ‘reference
-provider’, requires=IS\_EMPTY\_OR(IS\_IN\_DB(db, ‘provider.id’,
-‘%(name)s’))), format=‘%(name)s’, migrate = True); \~\~\~\~
+``` {python}
+
+db.define_table('thing',
+    Field('id', 'integer'),
+    Field('name', 'string', 
+          requires = IS_NOT_EMPTY(error_message='cannot be empty')),
+    Field('description', 'string'),
+    Field('qty', 'integer', default=1, label=T('Quantity')),
+    Field('picture', 'upload'),
+    Field('created_on', 'datetime'),
+    Field('provider_id', 'reference provider',
+          requires=IS_EMPTY_OR(IS_IN_DB(db, 'provider.id', '%(name)s'))),
+    format='%(name)s',
+    migrate = True);
+```
 
 # Secciones en el futuro
 

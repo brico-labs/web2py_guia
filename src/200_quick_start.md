@@ -476,12 +476,14 @@ db.define_table('provider',
     migrate = True);
 ~~~~
 
-Y ahora a la tabla `thing` le añadimos la referencia a proveedores:
+Y ahora, a la tabla `thing`, le añadimos la referencia a proveedores:
+
 ~~~~{python}
 
 db.define_table('thing',
     Field('id', 'integer'),
-    Field('name', 'string', requires = IS_NOT_EMPTY(error_message='cannot be empty')),
+    Field('name', 'string', 
+          requires = IS_NOT_EMPTY(error_message='cannot be empty')),
     Field('description', 'string'),
     Field('qty', 'integer', default=1, label=T('Quantity')),
     Field('picture', 'upload'),
