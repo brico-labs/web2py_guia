@@ -329,6 +329,9 @@ db.define_table('thing',
     migrate = True);
 ~~~~
 
+#### Tickets de error
+
+
 Ya hemos salvado nuestro fichero, vamos a echar un ojo a nuestra base
 de datos con el botón _Graph Model_.
 
@@ -370,6 +373,9 @@ Si visitas ahora la sección de administración de la base de datos
 puedes añadir algunas "cosas" a la nueva tabla.
 
 ![Añadir destornillador](src/img/add_thing_a.jpg)
+
+
+#### Mejorando la tabla
 
 Evidentemente nuestro modelo de "cosa" es demasiado simple, tenemos
 que añadirle nuevos atributos de [distintos
@@ -452,17 +458,40 @@ Por último hemos añadido el `format` a la definición de la tabla,
 `format` especifica que cuando nos refiramos a un objeto "cosa" se
 represente por defecto con su atributo `name`.
 
+#### Relaciones entre tablas
+
+Supongamos ahora que queremos tener registrado en nuestro inventario
+al proveedor de cada una de nuestras cosas. ¿cómo se hace eso?
+
+Vamos a crear una tabla básica con los proveedores:
 
 ~~~~{python}
-db.define_table('thing',
+
+db.define_table('provider',
     Field('id', 'integer'),
-    Field('description', 'string'),
-    Field('picture', 'upload'),
-    Field('created_on, 'datetime'),
-    Field('created_by, 'reference auth_user', default = auth.user_id),
-    Field('updated_on, 'datetime'),
+    Field('name, 'string'),
+    Field('CIF', 'string'),
+    Field('email', 'string'),
+    Field('phone', 'string'),
     migrate = True);
 ~~~~
+
+Y ahora a la tabla `thing` le añadimos la referencia a proveedores:
+~~~~{python}
+
+db.define_table('thing',
+    Field('id', 'integer'),
+    Field('name', 'string', requires = IS_NOT_EMPTY(error_message='cannot be empty')),
+    Field('description', 'string'),
+    Field('qty', 'integer', default=1, label=T('Quantity')),
+    Field('picture', 'upload'),
+    Field('created_on', 'datetime'),
+    Field('provider_id', 'reference provider',
+          requires=IS_EMPTY_OR(IS_IN_DB(db, 'provider.id', '%(name)s'))),
+    format='%(name)s',
+    migrate = True);
+~~~~
+
 
 
 
@@ -475,3 +504,14 @@ db.define_table('thing',
 ## Certificados let's encrypt
 
 
+~~~~{phyton}
+
+db.define_table('thing',
+    Field('id', 'integer'),
+    Field('description', 'string'),
+    Field('picture', 'upload'),
+    Field('created_on, 'datetime'),
+    Field('created_by, 'reference auth_user', default = auth.user_id),
+    Field('updated_on, 'datetime'),
+    migrate = True);
+~~~~

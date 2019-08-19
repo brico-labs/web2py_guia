@@ -513,6 +513,9 @@ db.define_table('thing',
     migrate = True);
 \end{verbatim}
 
+\hypertarget{tickets-de-error}{%
+\paragraph{Tickets de error}\label{tickets-de-error}}
+
 Ya hemos salvado nuestro fichero, vamos a echar un ojo a nuestra base de
 datos con el botón \emph{Graph Model}.
 
@@ -566,6 +569,9 @@ añadir algunas ``cosas'' a la nueva tabla.
 \includegraphics{src/img/add_thing_a.jpg}
 \caption{Añadir destornillador}
 \end{figure}
+
+\hypertarget{mejorando-la-tabla}{%
+\paragraph{Mejorando la tabla}\label{mejorando-la-tabla}}
 
 Evidentemente nuestro modelo de ``cosa'' es demasiado simple, tenemos
 que añadirle nuevos atributos de
@@ -655,16 +661,37 @@ Por último hemos añadido el \texttt{format} a la definición de la tabla,
 \texttt{format} especifica que cuando nos refiramos a un objeto ``cosa''
 se represente por defecto con su atributo \texttt{name}.
 
+\hypertarget{relaciones-entre-tablas}{%
+\paragraph{Relaciones entre tablas}\label{relaciones-entre-tablas}}
+
+Supongamos ahora que queremos tener registrado en nuestro inventario al
+proveedor de cada una de nuestras cosas. ¿cómo se hace eso?
+
+Vamos a crear una tabla básica con los proveedores:
+
 \begin{verbatim}
-db.define_table('thing',
+
+db.define_table('provider',
     Field('id', 'integer'),
-    Field('description', 'string'),
-    Field('picture', 'upload'),
-    Field('created_on, 'datetime'),
-    Field('created_by, 'reference auth_user', default = auth.user_id),
-    Field('updated_on, 'datetime'),
+    Field('name, 'string'),
+    Field('CIF', 'string'),
+    Field('email', 'string'),
+    Field('phone', 'string'),
     migrate = True);
 \end{verbatim}
+
+Y ahora a la tabla \texttt{thing} le añadimos la referencia a
+proveedores:
+\textasciitilde\textasciitilde\textasciitilde\textasciitilde\{python\}
+
+db.define\_table(`thing', Field(`id', `integer'), Field(`name',
+`string', requires = IS\_NOT\_EMPTY(error\_message=`cannot be empty')),
+Field(`description', `string'), Field(`qty', `integer', default=1,
+label=T(`Quantity')), Field(`picture', `upload'), Field(`created\_on',
+`datetime'), Field(`provider\_id', `reference provider',
+requires=IS\_EMPTY\_OR(IS\_IN\_DB(db, `provider.id', `\%(name)s'))),
+format=`\%(name)s', migrate = True);
+\textasciitilde\textasciitilde\textasciitilde\textasciitilde{}
 
 \hypertarget{secciones-en-el-futuro}{%
 \section{Secciones en el futuro}\label{secciones-en-el-futuro}}
@@ -678,5 +705,17 @@ db.define_table('thing',
 \hypertarget{certificados-lets-encrypt}{%
 \subsection{Certificados let's
 encrypt}\label{certificados-lets-encrypt}}
+
+\begin{verbatim}
+
+db.define_table('thing',
+    Field('id', 'integer'),
+    Field('description', 'string'),
+    Field('picture', 'upload'),
+    Field('created_on, 'datetime'),
+    Field('created_by, 'reference auth_user', default = auth.user_id),
+    Field('updated_on, 'datetime'),
+    migrate = True);
+\end{verbatim}
 
 \end{document}

@@ -179,6 +179,8 @@ El objetivo de nuestra aplicación es mantener un inventario de “cosas”. Par
     Field('id', 'integer'),
     Field('desc', 'string'),
     migrate = True);</pre>
+==== Tickets de error ====
+
 Ya hemos salvado nuestro fichero, vamos a echar un ojo a nuestra base de datos con el botón ''Graph Model''.
 
 [[File:src/img/internal_error.jpg|thumb|none|alt=Error interno|Error interno]]
@@ -202,6 +204,8 @@ El campo <code>id</code> es ''casi'' obligatorio en todas las tablas que definam
 Si visitas ahora la sección de administración de la base de datos puedes añadir algunas “cosas” a la nueva tabla.
 
 [[File:src/img/add_thing_a.jpg|thumb|none|alt=Añadir destornillador|Añadir destornillador]]
+
+==== Mejorando la tabla ====
 
 Evidentemente nuestro modelo de “cosa” es demasiado simple, tenemos que añadirle nuevos atributos de [http://web2py.com/books/default/chapter/29/06/the-database-abstraction-layer#Field-types distintos tipos] para que sea funcional. Pero antes de ir a por todas vamos a ver algunas funciones que nos ofrece '''''web2py''''' para construir los Modelos.
 
@@ -245,14 +249,24 @@ El <code>label</code> se usará en los formularios en lugar del nombre del campo
 
 Por último hemos añadido el <code>format</code> a la definición de la tabla, <code>format</code> especifica que cuando nos refiramos a un objeto “cosa” se represente por defecto con su atributo <code>name</code>.
 
-<pre class="{python}">db.define_table('thing',
+==== Relaciones entre tablas ====
+
+Supongamos ahora que queremos tener registrado en nuestro inventario al proveedor de cada una de nuestras cosas. ¿cómo se hace eso?
+
+Vamos a crear una tabla básica con los proveedores:
+
+<pre class="{python}">
+db.define_table('provider',
     Field('id', 'integer'),
-    Field('description', 'string'),
-    Field('picture', 'upload'),
-    Field('created_on, 'datetime'),
-    Field('created_by, 'reference auth_user', default = auth.user_id),
-    Field('updated_on, 'datetime'),
+    Field('name, 'string'),
+    Field('CIF', 'string'),
+    Field('email', 'string'),
+    Field('phone', 'string'),
     migrate = True);</pre>
+Y ahora a la tabla <code>thing</code> le añadimos la referencia a proveedores: ~~~~{python}
+
+db.define_table(‘thing’, Field(‘id’, ‘integer’), Field(‘name’, ‘string’, requires = IS_NOT_EMPTY(error_message=‘cannot be empty’)), Field(‘description’, ‘string’), Field(‘qty’, ‘integer’, default=1, label=T(‘Quantity’)), Field(‘picture’, ‘upload’), Field(‘created_on’, ‘datetime’), Field(‘provider_id’, ‘reference provider’, requires=IS_EMPTY_OR(IS_IN_DB(db, ‘provider.id’, ‘%(name)s’))), format=‘%(name)s’, migrate = True); ~~~~
+
 = Secciones en el futuro =
 
 == web2py y git ==
@@ -261,4 +275,13 @@ Por último hemos añadido el <code>format</code> a la definición de la tabla, 
 
 == Certificados let’s encrypt ==
 
+<pre class="{phyton}">
+db.define_table('thing',
+    Field('id', 'integer'),
+    Field('description', 'string'),
+    Field('picture', 'upload'),
+    Field('created_on, 'datetime'),
+    Field('created_by, 'reference auth_user', default = auth.user_id),
+    Field('updated_on, 'datetime'),
+    migrate = True);</pre>
 <references />
