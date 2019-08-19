@@ -26,7 +26,7 @@ completa y actualizada (disponible también en castellano) y sobre todo
 una comunidad de usuarios y desarrolladores muy activa y que responden
 con rapidez a las dudas que puedas plantear.
 
-__web2py__ está basado (no estrictamente) en el modelo
+__web2py__ está basado en el modelo
 [MVC](https://es.wikipedia.org/wiki/Modelo%E2%80%93vista%E2%80%93controlador)
 
 __web2py__ incorpora _Bootstrap 4_

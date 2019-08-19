@@ -111,7 +111,7 @@ muy completa y actualizada (disponible también en castellano) y sobre
 todo una comunidad de usuarios y desarrolladores muy activa y que
 responden con rapidez a las dudas que puedas plantear.
 
-\textbf{web2py} está basado (no estrictamente) en el modelo
+\textbf{web2py} está basado en el modelo
 \href{https://es.wikipedia.org/wiki/Modelo\%E2\%80\%93vista\%E2\%80\%93controlador}{MVC}
 
 \textbf{web2py} incorpora \emph{Bootstrap 4}
@@ -148,10 +148,9 @@ instalado de esta forma es ideal para entornos de desarrollo. Para un
 entorno de producción puede ser más conveniente instalar
 \textbf{\emph{web2py}} tras un servidor web como
 \href{https://www.apache.org/}{Apache} o
-\href{https://www.nginx.com/}{Nginx}, aunque dependiendo de la carga de
-trabajo y de como administres tus sistemas no tiene por que ser
-imprescindible y lo puedes poner en producción en modo
-\emph{standalone}.
+\href{https://www.nginx.com/}{Nginx}, pero dependiendo de la carga de
+trabajo y de como administres tus sistemas puede ser mejor opción usarlo
+\emph{standalone} también en producción.
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -222,8 +221,8 @@ openssl x509 -req -days 365 -in server.csr \
   Servidor de base de datos.
 
   Para usar \textbf{\emph{web2py}} es imprescindible tener acceso a un
-  servidor de base de datos. Podemos usar MySQL o MariaDB por ejemplo.
-  Pero para empezar rápidamente vamos a tirar de
+  servidor de base de datos. Podemos usar \emph{MySQL} o \emph{MariaDB}
+  por ejemplo. Pero para empezar rápidamente vamos a tirar de
   \href{https://www.sqlite.org/version3.html}{SQLite}, un servidor fácil
   de instalar potente y versátil. Es importante usar la versión 3 que
   introduce grandes mejoras sobre el antiguo \emph{SQLite}
@@ -245,8 +244,10 @@ python web2py.py -a 'admin_password' -c server.crt -k server.key \
 -i 0.0.0.0 -p 8000
 \end{verbatim}
 
-  Y ya podemos acceder nuestro server en la dirección
-  \url{https://localhost:8000}
+  Y ya podemos acceder nuestro server \textbf{\emph{web2py}}, con
+  nuestro
+  \href{https://www.mozilla.org/en-US/firefox/developer/}{navegador
+  favorito}, visitando la dirección \url{https://localhost:8000}
 \end{enumerate}
 
 Y ahora si que ya tenemos todo listo para empezar a usar
@@ -352,20 +353,36 @@ Vamos a crear nuestra primera aplicación en web2py.
 Si has seguido los pasos de la
 \protect\hyperlink{instalaciuxf3n}{sección anterior} ya tienes el
 \textbf{\emph{web2py}} funcionando y puedes seguir cualquiera de los
-tutoriales que hay en la red para aprender.
+tutoriales que hay en la red para aprender. El
+\href{http://web2py.com/books/default/chapter/29/03/overview}{capítulo
+3} del libro de \textbf{\emph{web2py}} es muy recomendable, y está
+disponible
+\href{http://web2py.com/books/default/chapter/41/03/resumen}{en
+castellano}, puedes ventilarte los ejemplos que trae explicados en una
+tarde y son muy ilustrativos.
 
 En esta guía vamos a ver la creación de una aplicación paso a paso.
 Crearemos una aplicación de inventario para el material de la Asociación
-BricoLabs, empezando por una funcionalidad sencilla y añadiendo cosas
-según se nos ocurran.
+BricoLabs, pero lo haremos de manera que también nos valga para uso
+particular y tener controladas todas nuestras cacharradas.
+
+Este no es un tutorial de diseño profesional de aplicaciones, solo
+pretendemos demostrar lo fácil que es iniciarse con
+\textbf{\emph{web2py}}.
+
+De hecho, no seguiremos un orden lógico en el diseño de la aplicación,
+si no que intentaremos seguir un orden que facilite conocer el
+framework.
+
+Sin más rollo, vamos a comenzar con nuestra aplicación:
 
 Crea una aplicación desde el interfaz de administración, en nuestro caso
 la llamaremos \textbf{\emph{cornucopia}}.
 
-Nuestro \textbf{\emph{web2py}} nace con algunas aplicaciones de ejemplo
-creadas, de hecho la pantalla inicial es una de ellas la aplicación
-``Welcome'' o ``Bienvenido'' (dependerá del lenguaje por defecto de tu
-navegador).
+Nuestro \textbf{\emph{web2py}} ``viene de serie'' con algunas
+aplicaciones de ejemplo. La propia pantalla inicial es una de ellas la
+aplicación ``Welcome'' o ``Bienvenido'' (dependerá del lenguaje por
+defecto de tu navegador).
 
 Para crear nuestra aplicación \textbf{\emph{cornucopia}}:
 
@@ -374,8 +391,8 @@ Para crear nuestra aplicación \textbf{\emph{cornucopia}}:
 \item
   Vamos al botón \textbf{admin} en la pantalla principal.
 \item
-  Metemos la password con la que hemos arrancado el
-  \textbf{\emph{web2py}} en la linea de comandos.
+  Metemos la password de administración (con la que hemos arrancado el
+  \textbf{\emph{web2py}} en la linea de comandos).
 \item
   Desde la ventana de administración creamos nuestra nueva aplicación
 \end{itemize}
@@ -405,8 +422,8 @@ correo que usará la aplicación para enviar correos a los usuarios. Por
 defecto viene viene la configuración para usar una cuenta de gmail como
 gateway, solo tenemos que cubrir los valores de usuario y password y la
 dirección de correo.\footnote{Es aconsejable crear una cuenta de gmail,
-  o cualquier otro servicio siminar, para pruebas, no se te ocurra usar
-  la tuya}
+  o cualquier otro servicio de correo que nos guste, para pruebas. Usar
+  tu cuenta de correo personal podría ser muy mala idea}
 
 \hypertarget{el-modelo}{%
 \subsubsection{El Modelo}\label{el-modelo}}
@@ -429,14 +446,16 @@ privilegios.
 
 Si echamos un ojo al modelo gráfico (\emph{Graphs Models}) veremos las
 tablas que \textbf{\emph{web2py}} ha creado por defecto y las relaciones
-entre ellas.
+entre ellas. Estas tablas que ha creado el \emph{framework} son las que
+se encargan de la gestión de usuarios, sus privilegios y el acceso de
+los mismos al sistema, es decir la capa de seguridad.
 
 Si vemos el log de comandos de sql (\emph{sql.log}) veremos los comandos
 que \textbf{\emph{web2py}} ha ejecutado en el motor de base de datos.
 
 Y por último si vemos \emph{database administration} podremos ver las
 tablas creadas en la base de datos, e incluso crear nuevos registros en
-esas tablas.
+esas tablas (de momento no lo hagas)
 
 También podemos echar un ojo al contenido del fichero \texttt{db.py} o
 \texttt{menu.py} pero por el momento \textbf{no} vamos a modificar nada
@@ -457,10 +476,14 @@ hay camiones de libros escritos sobre el tema y todo tipo de
 herramientas para ayudar al diseñador. Pero nosotros nos vamos a centrar
 en usar sólo lo que nos ofrece \textbf{\emph{web2py}}.
 
-Vamos a definir el modelo (tablas) de nuestra aplicación en un nuevo
-fichero de la sección \emph{Models}, que llamaremos \texttt{db\_custom}
-así que pulsamos en el botón \emph{Create}, y creamos el fichero
-\texttt{db\_custom}.
+Además como estamos aprendiendo vamos a ver algunas facilidades que nos
+da \textbf{\emph{web2py}} sin proponer ningún proceso de diseño del
+modelo (recuerda, esto no es un curso de diseño de aplicaciones)
+
+Vamos a definir el modelo (concretamente las tablas) de nuestra
+aplicación en un nuevo fichero de la sección \emph{Models}, que
+llamaremos \texttt{db\_custom} así que pulsamos en el botón
+\emph{Create}, y creamos el fichero \texttt{db\_custom}.
 
 \begin{figure}
 \centering
@@ -469,9 +492,14 @@ así que pulsamos en el botón \emph{Create}, y creamos el fichero
 \end{figure}
 
 \textbf{\emph{web2py}} parsea todos los ficheros de la sección
-\emph{Models} por orden alfabético. Es importante que \texttt{db.py} sea
-siempre el primero. \textbf{\emph{web2py}} se encarga también de añadir
-la extensión \texttt{.py} al nuevo fichero que hemos creado.
+\emph{Models} por orden alfabético. Esto nos permite separar nuestro
+código del que viene originalmente con la aplicación. Pero es importante
+que \texttt{db.py} sea siempre el primero alfabeticamente para que se
+ejecute antes que el resto.
+
+\textbf{\emph{web2py}} se encarga también de añadir la extensión
+\texttt{.py} al nuevo fichero que estamos creando así que teclea sólo el
+nombre \texttt{db\_custom}.
 
 El objetivo de nuestra aplicación es mantener un inventario de
 ``cosas''. Parece lógico que nuestra primera tabla valga para almacenar
@@ -530,15 +558,108 @@ cada fila en una tabla y se usará internamente como clave primaria.
 Podemos usar otros campos como clave primaria pero de momento
 mantendremos las cosas símples.
 
-Nuestro modelo de ``cosa'' es demasiado simple, podemos añadirle nuevos
-atributos de
+Si visitas ahora la sección de administración de la base de datos puedes
+añadir algunas ``cosas'' a la nueva tabla.
+
+\begin{figure}
+\centering
+\includegraphics{src/img/add_thing_a.jpg}
+\caption{Añadir destornillador}
+\end{figure}
+
+Evidentemente nuestro modelo de ``cosa'' es demasiado simple, tenemos
+que añadirle nuevos atributos de
 \href{http://web2py.com/books/default/chapter/29/06/the-database-abstraction-layer\#Field-types}{distintos
-tipos}.
+tipos} para que sea funcional. Pero antes de ir a por todas vamos a ver
+algunas funciones que nos ofrece \textbf{\emph{web2py}} para construir
+los Modelos.
+
+Vamos a añadir algunos campos más de distintos tipos a nuestro modelo y
+verlos con un poco de calma.
+
+\begin{verbatim}
+db.define_table('thing',
+    Field('id', 'integer'),
+    Field('name', 'string'),
+    Field('description', 'string'),
+    Field('picture',, 'upload'),
+    Field('created_on, 'datetime'),
+    migrate = True);
+\end{verbatim}
+
+Si ahora volvemos al administrador de base de datos podemos comprobar
+que:
+
+\begin{itemize}
+\item
+  No hemos perdido las ``cosas'' que añadimos antes,
+  \textbf{\emph{web2py}} ha añadido las nuevas columnas pero ha
+  conservado los valores de las antiguas.
+\item
+  Podemos editar las ``cosas'' que habíamos añadido sin mas que hacer
+  click en el \texttt{id}
+\item
+  Si queremos editar (o añadir) una ``cosa'', \textbf{\emph{web2py}} nos
+  ofrece un diálogo para subir la foto de nuestro objeto. Sabe que los
+  atributos de tipo upload son fichero que subiremos al servidor.
+
+  De la misma forma nos ofrece un menú inteligente para añadir el campo
+  \texttt{datetime}
+\end{itemize}
+
+Este es el tipo de facilidades que ofrecen los \emph{frameworks} para
+acelerar el trabajo de crear una aplicación.
+
+Vamos a hacer un pelín más sofisticada nuestra tabla \texttt{thing}:
+
+\begin{verbatim}
+db.define_table('thing',
+    Field('id', 'integer'),
+    Field('name', 'string', requires = IS_NOT_EMPTY(error_message='cannot be empty')),
+    Field('description', 'string'),
+    Field('qty', 'integer', default=1, label=T('Quantity')),
+    Field('picture', 'upload'),
+    Field('created_on', 'datetime'),
+    format='%(name)s',
+    migrate = True);
+\end{verbatim}
+
+En la linea del \texttt{name} hemos añadido un \texttt{VALIDATOR}. Se
+trata de
+\href{http://web2py.com/books/default/chapter/29/07/forms-and-validators}{funciones
+auxiliares} que nos permiten comprobar multitud de condiciones y que son
+extremadamente útiles (iremos viendo casos de uso). En este caso
+exigimos que el campo \texttt{name} no puede estar vacío y además
+especificamos el mensaje de error que debe aparecer si sucede.
+
+Hemos añadido un atributo \texttt{qty} (cantidad), hemos especificado
+que tenga un valor por defecto de una unidad, y además hemos
+especificado el \texttt{label}.
+
+El \texttt{label} se usará en los formularios en lugar del nombre del
+campo en la base de datos. Si vamos a añadir una nueva ``cosa'' veremos
+que en el formulario no aparece \emph{qty} sino que nos pregunta
+\emph{Quantity}. Además, y esto es muy importante, hemos asignado el
+valor de la etiqueta con la función \texttt{T()}.
+
+\textbf{\emph{web2py}} incorpora un sistema completo de
+internacionalización. Al usar la función \texttt{T()} la cadena
+\emph{Quantity} se ha añadido a todos los diccionarios de traducción (si
+es que no estaba ya) y solo tenemos que añadir la traducción en el
+diccionario correspondiente (p.ej. a \texttt{es.py}) para que funcione
+la i16n. Una vez añadida si el idioma por defecto de nuestro navegador
+es el castellano, en el formulario aparecerá ``Cantidad'' en lugar de
+\emph{Quantity}.
+
+Por último hemos añadido el \texttt{format} a la definición de la tabla,
+\texttt{format} especifica que cuando nos refiramos a un objeto ``cosa''
+se represente por defecto con su atributo \texttt{name}.
 
 \begin{verbatim}
 db.define_table('thing',
     Field('id', 'integer'),
     Field('description', 'string'),
+    Field('picture', 'upload'),
     Field('created_on, 'datetime'),
     Field('created_by, 'reference auth_user', default = auth.user_id),
     Field('updated_on, 'datetime'),

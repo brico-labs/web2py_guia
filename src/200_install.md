@@ -7,9 +7,9 @@ en modo _standalone_. ___web2py___ instalado de esta forma es ideal
 para entornos de desarrollo. Para un entorno de producción puede ser
 más conveniente instalar ___web2py___ tras un servidor web como
 [Apache](https://www.apache.org/) o [Nginx](https://www.nginx.com/),
-aunque dependiendo de la carga de trabajo y de como administres tus
-sistemas no tiene por que ser imprescindible y lo puedes poner en
-producción en modo _standalone_.
+pero dependiendo de la carga de trabajo y de como administres tus
+sistemas puede ser mejor opción usarlo _standalone_ también en
+producción.
 
 1. Creamos un entorno virtual
 
@@ -77,7 +77,7 @@ producción en modo _standalone_.
 #. Servidor de base de datos.
    
    Para usar ___web2py___ es imprescindible tener acceso a un servidor
-   de base de datos. Podemos usar MySQL o MariaDB por ejemplo. Pero
+   de base de datos. Podemos usar _MySQL_ o _MariaDB_ por ejemplo. Pero
    para empezar rápidamente vamos a tirar de
    [SQLite](https://www.sqlite.org/version3.html), un servidor fácil
    de instalar potente y versátil. Es importante usar la versión 3 que
@@ -99,7 +99,10 @@ producción en modo _standalone_.
    -i 0.0.0.0 -p 8000
    ~~~~
 
-   Y ya podemos acceder nuestro server en la dirección <https://localhost:8000>
+   Y ya podemos acceder nuestro server ___web2py___, con nuestro
+   [navegador
+   favorito](https://www.mozilla.org/en-US/firefox/developer/),
+   visitando la dirección <https://localhost:8000>
    
 
 Y ahora si que ya tenemos todo listo para empezar a usar ___web2py___.
@@ -187,25 +190,40 @@ Vamos a crear nuestra primera aplicación en web2py.
 
 Si has seguido los pasos de la [sección anterior](#instalación) ya
 tienes el ___web2py___ funcionando y puedes seguir cualquiera de los
-tutoriales que hay en la red para aprender.
+tutoriales que hay en la red para aprender. El [capítulo
+3](http://web2py.com/books/default/chapter/29/03/overview) del libro
+de ___web2py___ es muy recomendable, y está disponible [en
+castellano](http://web2py.com/books/default/chapter/41/03/resumen),
+puedes ventilarte los ejemplos que trae explicados en una tarde y son
+muy ilustrativos.
 
 En esta guía vamos a ver la creación de una aplicación paso a paso.
 Crearemos una aplicación de inventario para el material de la
-Asociación BricoLabs, empezando por una funcionalidad sencilla y
-añadiendo cosas según se nos ocurran.
+Asociación BricoLabs, pero lo haremos de manera que también nos valga
+para uso particular y tener controladas todas nuestras cacharradas.
+
+Este no es un tutorial de diseño profesional de aplicaciones, solo
+pretendemos demostrar lo fácil que es iniciarse con ___web2py___.
+
+De hecho, no seguiremos un orden lógico en el diseño de la aplicación,
+si no que intentaremos seguir un orden que facilite conocer el
+framework.
+
+Sin más rollo, vamos a comenzar con nuestra aplicación:
 
 Crea una aplicación desde el interfaz de administración, en nuestro
 caso la llamaremos ___cornucopia___.
 
-Nuestro ___web2py___ nace con algunas aplicaciones de ejemplo creadas,
-de hecho la pantalla inicial es una de ellas la aplicación "Welcome" o
-"Bienvenido" (dependerá del lenguaje por defecto de tu navegador).
+Nuestro ___web2py___ "viene de serie" con algunas aplicaciones de
+ejemplo. La propia pantalla inicial es una de ellas la aplicación
+"Welcome" o "Bienvenido" (dependerá del lenguaje por defecto de tu
+navegador).
 
 Para crear nuestra aplicación ___cornucopia___:
 
 * Vamos al botón __admin__ en la pantalla principal.
-* Metemos la password con la que hemos arrancado el ___web2py___ en la
-  linea de comandos.
+* Metemos la password de administración (con la que hemos arrancado el ___web2py___ en la
+  linea de comandos).
 * Desde la ventana de administración creamos nuestra nueva aplicación
 
 Inmediatamente nos encontraremos en la ventana de diseño de nuestra
@@ -230,8 +248,8 @@ usará la aplicación para enviar correos a los usuarios. Por defecto
 viene viene la configuración para usar una cuenta de gmail como
 gateway, solo tenemos que cubrir los valores de usuario y password y
 la dirección de correo.^[Es aconsejable crear una cuenta de gmail, o
-cualquier otro servicio siminar, para pruebas, no se te ocurra usar la
-tuya]
+cualquier otro servicio de correo que nos guste, para pruebas. Usar tu
+cuenta de correo personal podría ser muy mala idea]
 
 
 ### El Modelo
@@ -249,14 +267,16 @@ las tablas relacionadas con la gestión de usuarios y sus privilegios.
 
 Si echamos un ojo al modelo gráfico (_Graphs Models_) veremos las
 tablas que ___web2py___ ha creado por defecto y las relaciones entre
-ellas.
+ellas. Estas tablas que ha creado el _framework_ son las que se
+encargan de la gestión de usuarios, sus privilegios y el acceso de los
+mismos al sistema, es decir la capa de seguridad.
 
 Si vemos el log de comandos de sql (_sql.log_) veremos los comandos
 que ___web2py___ ha ejecutado en el motor de base de datos.
 
 Y por último si vemos _database administration_ podremos ver las
 tablas creadas en la base de datos, e incluso crear nuevos registros
-en esas tablas.
+en esas tablas (de momento no lo hagas)
 
 También podemos echar un ojo al contenido del fichero `db.py` o
 `menu.py` pero por el momento __no__ vamos a modificar nada en esos
@@ -277,17 +297,25 @@ hay camiones de libros escritos sobre el tema y todo tipo de
 herramientas para ayudar al diseñador. Pero nosotros nos vamos a
 centrar en usar sólo lo que nos ofrece ___web2py___.
 
-Vamos a definir el modelo (tablas) de nuestra aplicación en un nuevo
-fichero de la sección _Models_, que llamaremos `db_custom` así que pulsamos en el botón _Create_,
-y creamos el fichero `db_custom`.
+Además como estamos aprendiendo vamos a ver algunas facilidades que
+nos da ___web2py___ sin proponer ningún proceso de diseño del modelo
+(recuerda, esto no es un curso de diseño de aplicaciones)
+
+Vamos a definir el modelo (concretamente las tablas) de nuestra
+aplicación en un nuevo fichero de la sección _Models_, que llamaremos
+`db_custom` así que pulsamos en el botón _Create_, y creamos el
+fichero `db_custom`.
 
 ![Crear fichero](src/img/create_db_custom.png)
 
 ___web2py___ parsea todos los ficheros de la sección _Models_ por
-orden alfabético. Es importante que `db.py` sea siempre el primero.
-___web2py___ se encarga también de añadir la extensión `.py` al nuevo
-fichero que hemos creado.
+orden alfabético. Esto nos permite separar nuestro código del que
+viene originalmente con la aplicación. Pero es importante que `db.py`
+sea siempre el primero alfabeticamente para que se ejecute antes que
+el resto.
 
+___web2py___ se encarga también de añadir la extensión `.py` al nuevo
+fichero que estamos creando así que teclea sólo el nombre `db_custom`.
 
 El objetivo de nuestra aplicación es mantener un inventario de
 "cosas". Parece lógico que nuestra primera tabla valga para almacenar
@@ -338,14 +366,98 @@ tabla y se usará internamente como clave primaria. Podemos usar otros
 campos como clave primaria pero de momento mantendremos las cosas
 símples.
 
-Nuestro modelo de "cosa" es demasiado simple, podemos añadirle nuevos
-atributos de [distintos
-tipos](http://web2py.com/books/default/chapter/29/06/the-database-abstraction-layer#Field-types).
+Si visitas ahora la sección de administración de la base de datos
+puedes añadir algunas "cosas" a la nueva tabla.
+
+![Añadir destornillador](src/img/add_thing_a.jpg)
+
+Evidentemente nuestro modelo de "cosa" es demasiado simple, tenemos
+que añadirle nuevos atributos de [distintos
+tipos](http://web2py.com/books/default/chapter/29/06/the-database-abstraction-layer#Field-types)
+para que sea funcional. Pero antes de ir a por todas vamos a ver
+algunas funciones que nos ofrece ___web2py___ para construir los
+Modelos.
+
+Vamos a añadir algunos campos más de distintos tipos a nuestro modelo
+y verlos con un poco de calma.
+
+~~~~{python}
+db.define_table('thing',
+    Field('id', 'integer'),
+    Field('name', 'string'),
+    Field('description', 'string'),
+    Field('picture',, 'upload'),
+    Field('created_on, 'datetime'),
+    migrate = True);
+~~~~
+
+Si ahora volvemos al administrador de base de datos podemos comprobar que:
+
+* No hemos perdido las "cosas" que añadimos antes, ___web2py___ ha
+  añadido las nuevas columnas pero ha conservado los valores de las
+  antiguas.
+* Podemos editar las "cosas" que habíamos añadido sin mas que hacer
+  click en el `id`
+* Si queremos editar (o añadir) una "cosa", ___web2py___ nos ofrece un
+  diálogo para subir la foto de nuestro objeto. Sabe que los atributos
+  de tipo upload son fichero que subiremos al servidor. 
+  
+  De la misma forma nos ofrece un menú inteligente para añadir el
+  campo `datetime`
+  
+Este es el tipo de facilidades que ofrecen los _frameworks_ para
+acelerar el trabajo de crear una aplicación.
+
+Vamos a hacer un pelín más sofisticada nuestra tabla `thing`:
+
+~~~~{python}
+db.define_table('thing',
+    Field('id', 'integer'),
+    Field('name', 'string', requires = IS_NOT_EMPTY(error_message='cannot be empty')),
+    Field('description', 'string'),
+    Field('qty', 'integer', default=1, label=T('Quantity')),
+    Field('picture', 'upload'),
+    Field('created_on', 'datetime'),
+    format='%(name)s',
+    migrate = True);
+~~~~
+
+En la linea del `name` hemos añadido un `VALIDATOR`. Se trata de
+[funciones
+auxiliares](http://web2py.com/books/default/chapter/29/07/forms-and-validators)
+que nos permiten comprobar multitud de condiciones y que son
+extremadamente útiles (iremos viendo casos de uso). En este caso
+exigimos que el campo `name` no puede estar vacío y además
+especificamos el mensaje de error que debe aparecer si sucede.
+
+Hemos añadido un atributo `qty` (cantidad), hemos especificado que
+tenga un valor por defecto de una unidad, y además hemos especificado
+el `label`.
+
+El `label` se usará en los formularios en lugar del nombre del campo
+en la base de datos. Si vamos a añadir una nueva "cosa" veremos que en
+el formulario no aparece _qty_ sino que nos pregunta _Quantity_.
+Además, y esto es muy importante, hemos asignado el valor de la
+etiqueta con la función `T()`.
+
+___web2py___ incorpora un sistema completo de internacionalización. Al
+usar la función `T()` la cadena _Quantity_ se ha añadido a todos los
+diccionarios de traducción (si es que no estaba ya) y solo tenemos que
+añadir la traducción en el diccionario correspondiente (p.ej. a
+`es.py`) para que funcione la i16n. Una vez añadida si el idioma por
+defecto de nuestro navegador es el castellano, en el formulario
+aparecerá "Cantidad" en lugar de _Quantity_.
+
+Por último hemos añadido el `format` a la definición de la tabla,
+`format` especifica que cuando nos refiramos a un objeto "cosa" se
+represente por defecto con su atributo `name`.
+
 
 ~~~~{python}
 db.define_table('thing',
     Field('id', 'integer'),
     Field('description', 'string'),
+    Field('picture', 'upload'),
     Field('created_on, 'datetime'),
     Field('created_by, 'reference auth_user', default = auth.user_id),
     Field('updated_on, 'datetime'),
