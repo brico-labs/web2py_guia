@@ -1,0 +1,8 @@
+# ignore hidden files but .gitignore files
+.*
+!.gitignore
+
+# ignore byte-compiled python files
+*.pyc
+*.poc
+

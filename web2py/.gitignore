@@ -1,0 +1,69 @@
+# ignore hidden files but .gitignore
+.*
+!.gitignore
+
+# ignore python compiled and objects files
+*.pyc
+*.pyo
+
+# ignore several editors backup files
+*~
+\#*
+*.1
+*.bak
+*.bak2
+
+# ignore this in web2py
+CHANGELOG
+LICENSE
+MANIFEST.in
+README.markdown
+VERSION
+anyserver.py
+deposit/
+examples/
+extras/
+fabfile.py
+gluon/
+handlers/
+httpserver.log
+httpserver.pid
+parameters_8000.py
+scripts/
+server.crt
+server.csr
+server.key
+site-packages/
+web2py.py
+welcome.w2p
+
+# ignore all but our app
+applications/*
+!applications/cornucopia
+
+# pretty sure we don't want this in git
+# but make a backup of databases and uploads in production
+applications/cornucopia/ABOUT
+applications/cornucopia/__init__.py
+applications/cornucopia/databases/
+applications/cornucopia/errors/
+applications/cornucopia/progress.log
+applications/cornucopia/routes.example.py
+applications/cornucopia/sessions/
+applications/cornucopia/uploads/
+
+# think! if you need one of this -> comment 
+applications/cornucopia/cron/
+applications/cornucopia/modules/
+# applications/cornucopia/private/   
+applications/cornucopia/static/
+
+
+applications/cornucopia/languages/*
+!applications/cornucopia/languages/en.py
+!applications/cornucopia/languages/es.py
+
+# you want at least part of this (maybe all)
+# applications/cornucopia/controllers/
+# applications/cornucopia/models/
+# applications/cornucopia/views/
